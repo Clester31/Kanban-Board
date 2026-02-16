@@ -70,13 +70,12 @@ export async function GET() {
     }
 
     const userBoards = await prisma.board.findMany({
-        where: {
-            userId: user.id
-        }
+      where: {
+        userId: user.id,
+      },
     });
 
-    return NextResponse.json(userBoards, { status: 201 })
-
+    return NextResponse.json(userBoards, { status: 201 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(

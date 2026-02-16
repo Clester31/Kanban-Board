@@ -7,7 +7,7 @@ export default function Navbar() {
   const { currentBoard } = useAppContext();
 
   return (
-    <div className="bg-charade-800 p-4 flex flex-row justify-between items-center w-[calc(100vw-16rem)] h-16">
+    <div className="bg-charade-800 p-4 flex flex-row justify-between border-b-2 border-charade-700 items-center w-[calc(100vw-16rem)] h-16">
       <div className="nav-left flex flex-row items-center">
         <h1 className="text-2xl font-semibold">{currentBoard?.name}</h1>
       </div>

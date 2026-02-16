@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="">
       <Navbar />
-      <div className="main-content p-2">
+      <div className="main-content p-8">
         <FullBoard />
       </div>
     </div>

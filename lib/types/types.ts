@@ -8,11 +8,33 @@ export interface BoardType {
     userId: string
 }
 
-export interface Column {
+export interface ColumnType {
     id: string
     name: string
     position: number
     color?: string
     createdAt: string
     updatedAt: string
+}
+
+export interface TaskType {
+    id: string
+    title: string
+    completed: boolean
+    position: number
+    createdAt: string
+    updatedAt: string
+
+    columnId: string
+
+    subTasks: subTaskType[]
+    tags: tagType[]
+}
+
+export interface subTaskType {
+
+}
+
+export interface tagType {
+
 }
