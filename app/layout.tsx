@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Navbar from "@/components/nav/Navbar";
 import Sidebar from "@/components/nav/Sidebar";
 import { ContextProvider } from "@/lib/context/AppContext";
+import PopupLayout from "@/components/popup/PopupLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,10 +38,14 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
         >
-          <div className="flex flex-row">
+          <div>
             <ContextProvider>
-              <Sidebar />
-              {children}
+              <PopupLayout>
+                <div className="flex flex-row">
+                  <Sidebar />
+                  {children}
+                </div>
+              </PopupLayout>
             </ContextProvider>
           </div>
         </body>

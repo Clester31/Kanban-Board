@@ -13,7 +13,7 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { boardId } = params;
+    const { boardId } = await params;
 
     const user = await prisma.user.findFirst({
       where: { clerkId },

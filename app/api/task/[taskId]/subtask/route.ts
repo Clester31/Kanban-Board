@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { boardId: string } },
+  { params }: { params: { taskId: string } },
 ) {
   try {
     const { userId: clerkId } = await auth();
@@ -13,7 +13,7 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { boardId } = await params;
+    const { taskId } = await params;
 
     const user = await prisma.user.findFirst({
       where: { clerkId },
@@ -24,37 +24,16 @@ export async function GET(
       return NextResponse.json({ error: "User Not Found" }, { status: 404 });
     }
 
-    // Verify the board exists and belongs to the user
-    const board = await prisma.board.findFirst({
+    const subtasks = await prisma.subtask.findMany({
       where: {
-        id: boardId,
-        userId: user.id,
-      },
-    });
-
-    if (!board) {
-      return NextResponse.json(
-        { error: "Board not found or unauthorized" },
-        { status: 404 },
-      );
-    }
-
-    // Get all columns for this board, ordered by position
-    const columns = await prisma.column.findMany({
-      where: {
-        boardId: boardId,
+        taskId: taskId,
       },
       orderBy: {
         position: "asc",
       },
-      include: {
-        _count: {
-          select: { tasks: true }, // Include task count per column
-        },
-      },
     });
 
-    return NextResponse.json(columns, { status: 200 });
+    return NextResponse.json(subtasks, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(

@@ -32,7 +32,14 @@ export interface TaskType {
 }
 
 export interface subTaskType {
+    id: string
+    title: string
+    completed: boolean
+    position: number
+    createdAt: string
+    updatedAt: string
 
+    taskId: string
 }
 
 export interface tagType {

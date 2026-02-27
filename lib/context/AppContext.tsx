@@ -15,6 +15,10 @@ export interface ContextType {
   // tasks
   tasks: Map<string, TaskType[]> | null;
   setTasks: (tasks: Map<string, TaskType[]> | null) => void;
+  // popups
+  popup: React.ReactNode | null
+  setPopup: (popup: React.ReactNode | null) => void;
+  closePopup: () => void
 }
 
 const AppContext = createContext<ContextType | undefined>(undefined);
@@ -31,6 +35,10 @@ export const ContextProvider = ({ children }: ContextProps) => {
   const [columns, setColumns] = useState<ColumnType[] | null>(null);
   // tasks
   const [tasks, setTasks] = useState<Map<string, TaskType[]> | null>(null);
+  // popup handler
+  const [popup, setPopup] = useState<React.ReactNode | null>(null)
+
+  const closePopup  = () => setPopup(null);
 
   const contextValue: ContextType = {
     boards,
@@ -40,7 +48,10 @@ export const ContextProvider = ({ children }: ContextProps) => {
     columns, 
     setColumns,
     tasks,
-    setTasks
+    setTasks,
+    popup,
+    setPopup,
+    closePopup
   };
 
   return (
